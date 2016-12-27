@@ -1,3 +1,5 @@
+// Package cliutil provides some helper functions for writing CLI
+// applications.
 package cliutil
 
 import (
@@ -37,7 +39,6 @@ func Run(run func(context.Context) error) error {
 		cancel()
 		select {
 		case err := <-res:
-			signal.Stop(sigs)
 			return err
 		case <-time.After(10 * time.Second):
 			return errors.New("cliutil: timeout in cancelling run")
